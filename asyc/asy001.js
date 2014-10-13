@@ -20,16 +20,18 @@ console.log(now.add(7,'days').subtract(1,'hours').format('YYYYMMDD hh:mm:ss:SSS'
  20141020 09:05:20:737
  */
 
-var arr=[{name:'Jack', delay: 200},
-         {name:'Mike', delay: 100},
-         {name:'Freewind', delay: 300}];
+/* 3件事情并行执行，没有异常产生 */
+var arr=[{name:'Jack', delay: 2000},
+         {name:'Mike', delay: 1000},
+         {name:'Freewind', delay: 3000}];
 
 as_x.each(arr,function(item,callback){
     log('1.1 enter:'+item.name);
     setTimeout(function(){
-        log('1.1 handle:'+item.name);
-        callback(null,item.name);
-        },item.delay);
+            log('1.1 handle:'+item.name);
+            callback(null,item.name);
+            },item.delay);
 },function(err){
     log('1.1 err:'+err);
 });
+
