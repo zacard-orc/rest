@@ -21,7 +21,7 @@ console.log(now.add(7,'days').subtract(1,'hours').format('YYYYMMDD hh:mm:ss:SSS'
  */
 
 
-
+/*
 var f_col={
     'f_a':function(a,b){console.log(a+b);},
     'f_b':function(a,c){console.log(a-c);},
@@ -51,16 +51,14 @@ as_x.each(tasks,function(item,callback){
     function(err){
         console.log('err:'+err);
     });
+*/
 
-
-
-/* 3件事情并行执行，没有异常产生，根据延时先后返回 */
-/*
 var arr=[{name:'Jack', delay: 2000, num:10},
-         {name:'Mike', delay: 1000, num:20},
-         {name:'Freewind', delay: 3000, num:30}];
+    {name:'Mike', delay: 1000, num:20},
+    {name:'Freewind', delay: 3000, num:30}];
 
-
+/* 简单的 并行 执行 */
+/*
 as_x.each(arr,function(item,callback){
     log('1.1 enter:'+item.name);
     setTimeout(function(){
@@ -71,3 +69,33 @@ as_x.each(arr,function(item,callback){
     log('1.1 err:'+err);
 });
 */
+
+
+/* 简单的 串行 执行 */
+/*
+as_x.eachSeries(arr,function(item,callback){
+    log('1.1 enter:'+item.name);
+    setTimeout(function(){
+        log('1.1 handle:'+item.name);
+        callback(null,item.name);
+    },item.delay);
+},function(err){
+    log('1.1 err:'+err);
+});
+*/
+
+/* 简单的 并行 执行，期间自动容错 */
+/*
+as_x.each(arr,function(item,callback){
+    log('1.1 enter:'+item.name);
+    setTimeout(function(){
+        log('1.1 handle:'+item.name);
+        if(item.name==='Jack') {
+            callback('myerr');
+        };
+    },item.delay);
+},function(err){
+    log('1.1 err:'+err);
+});
+*/
+
