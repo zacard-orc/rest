@@ -60,7 +60,8 @@ as_x.each(tasks,function(item,callback){
 
 var arr=[{name:'Jack', delay: 2000, num:10},
     {name:'Mike', delay: 1000, num:20},
-    {name:'Freewind', delay: 3000, num:30}];
+    {name:'Freewind', delay: 3000, num:30},
+    {name:'Bob', delay: 5000, num:50}];
 
 /* 简单的 并行 执行 */
 /*
@@ -105,6 +106,7 @@ as_x.each(arr,function(item,callback){
 */
 
 /* 简单的 串行 执行，全部终止 */
+/*
 as_x.eachSeries(arr,function(item,callback){
     log('1.1 enter:'+item.name);
     setTimeout(function(){
@@ -116,4 +118,42 @@ as_x.eachSeries(arr,function(item,callback){
 },function(err){
     log('1.1 err:'+err);
 });
+*/
 
+/* 简单的 分批并行 执行，每批的次数由参数2决定需要task中执行多少 */
+
+/*
+as_x.eachLimit(arr, 2, function(item, callback) {
+    log('1.5 enter: ' + item.name);
+    setTimeout(function(){
+        log('1.5 handle: ' + item.name);
+        callback(null, item.name);
+    }, item.delay);
+}, function(err) {
+    log('1.5 err: ' + err);
+});
+*/
+
+/*
+ 01.966> 1.5 enter: Jack
+ 01.967> 1.5 enter: Mike
+ 01.967> 1.5 enter: Freewind
+ 02.976> 1.5 handle: Mike
+ 03.977> 1.5 handle: Jack
+ 04.975> 1.5 handle: Freewind
+ 04.975> 1.5 err: undefined
+ */
+
+/* 简单的 分批并行 执行，每批的次数由参数2决定需要task中执行多少，遇到报错后，批内继续，批外终止， */
+
+ as_x.eachLimit(arr, 2, function(item, callback) {
+    log('1.5 enter: ' + item.name);
+    setTimeout(function(){
+        log('1.5 handle: ' + item.name);
+        if(item.name==='Jack') {
+            callback('myerr');
+        }
+        }, item.delay);
+ }, function(err) {
+    log('1.5 err: ' + err);
+ });
