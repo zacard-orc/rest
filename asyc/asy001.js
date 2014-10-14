@@ -20,6 +20,11 @@ console.log(now.add(7,'days').subtract(1,'hours').format('YYYYMMDD hh:mm:ss:SSS'
  20141020 09:05:20:737
  */
 
+/* 目录 ：
+
+
+
+ */
 
 /*
 var f_col={
@@ -98,4 +103,17 @@ as_x.each(arr,function(item,callback){
     log('1.1 err:'+err);
 });
 */
+
+/* 简单的 串行 执行，全部终止 */
+as_x.eachSeries(arr,function(item,callback){
+    log('1.1 enter:'+item.name);
+    setTimeout(function(){
+        log('1.1 handle:'+item.name);
+        if(item.name==='Jack') {
+            callback('myerr');
+        };
+    },item.delay);
+},function(err){
+    log('1.1 err:'+err);
+});
 
