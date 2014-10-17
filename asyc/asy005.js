@@ -49,7 +49,6 @@ http.createServer(function(req,res){
         // 1---最传统的执行
         callback(null,f_col[item](f_par_x[item],f_par_y[item]));
 
-
         // 2---串行执行的结果
         setTimeout(function()
             {callback(null,f_col[item](f_par_x[item],f_par_y[item]));}
@@ -74,12 +73,12 @@ http.createServer(function(req,res){
        // 2---串行执行的结果
         setTimeout(function()
             {callback(null,f_col[item](f_par_x[item],f_par_y[item]));}
-            ,5000);
+            ,1000);
         },function(err,results){
         log('err:'+err);
         res.end(results.join());
         });
     }
-}).listen(5555, '127.0.0.1',function(){
+}).listen(5555, '0.0.0.0',function(){
         console.log('Server has started 5555;')
     });
