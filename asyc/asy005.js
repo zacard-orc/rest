@@ -65,18 +65,21 @@ http.createServer(function(req,res){
 */
 
 http.createServer(function(req,res){
-    as_x.mapSeries(tasks,function(item,callback){
-
-
-        // 2---串行执行的结果
+    if (url.parse(req.url).path.split('/')[1]=='abc')   //----  999999999 ----------
+    {    console.log('aaaa');
+        res.end("hello,it's hi speed1111");}
+    else
+    {
+        as_x.mapSeries(tasks,function(item,callback){
+       // 2---串行执行的结果
         setTimeout(function()
             {callback(null,f_col[item](f_par_x[item],f_par_y[item]));}
-            ,1000);
-
-    },function(err,results){
+            ,5000);
+        },function(err,results){
         log('err:'+err);
         res.end(results.join());
-    });
+        });
+    }
 }).listen(5555, '127.0.0.1',function(){
         console.log('Server has started 5555;')
     });
