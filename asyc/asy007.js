@@ -21,6 +21,7 @@ var f_col={
     'f_d':function(a,e){console.log(a+e);return a+e;}
 }
 
+
 var f_par_x={
     'f_a':10,
     'f_b':20,
@@ -47,6 +48,7 @@ as_x.mapSeries(tasks,function(item,callback){
             console.log(tasks[a]);
             a++;
             callback(null,f_col[item](f_par_x[item],f_par_y[item]));
+            f_par_x[tasks[a]]=99;
         }
         ,1000);
 },function(err,results){
