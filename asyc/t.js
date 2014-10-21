@@ -6,15 +6,25 @@ var moment=require('moment');
 
 exports.inc = function(n, callback, timeout) {
     //将参数n自增1之后的结果返回给async
-    timeout = timeout || 200;
+    timeout = timeout || 2000;
     setTimeout(function() {
         callback(null, n+1);
     }, timeout);
 };
 
+exports.inc1 = function(n, callback, timeout) {
+    //将参数n自增1之后的结果返回给async
+    timeout = timeout || 2000;
+    callback(null, n+1);
+};
+
+exports.fire1 = function(n, callback, timeout) {
+        callback(null,n);
+};
+
 exports.fire = function(obj, callback, timeout) {
     //直接将obj的内容返回给async
-    timeout = timeout || 200;
+    timeout = timeout || 2000;
     setTimeout(function() {
         callback(null, obj);
     }, timeout);
