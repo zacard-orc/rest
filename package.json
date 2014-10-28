@@ -7,6 +7,8 @@
     },
     "dependencies": {
         "async": "*",
-        "moment":"*"
+        "moment":"*",
+        "mysql":"*",
+        "log4js":"*"
     }
 }
